@@ -15,7 +15,8 @@ class App extends React.Component {
     this.state = {
       error: null,
       loading: true, // as fetching admin first
-      hint: "Please ensure you're using the RINKEBY testnet with your web3.js wallet.",
+      hint: `Please ensure you're using a web3.js wallet such as <a href="https://metamask.io" target="_blank">Metamask</a>.  Please ensure you're using the <a href="https://rinkeby.etherscan.io" target="_blank">Rinkeby testnet</a> with your web3.js wallet.`,
+      footnote: `<p>For <em>DOLLARS</em> our make-believe "city" has previously <a href="https://test.ledger.overhide.io" target="_blank">registered</a> with the <a href="https://test.ledger.overhide.io" target="_blank">overhide-ledger test network</a> using their <code>0xd6106c445A07a6A1caF02FC8050F1FDe30d7cE8b</code> ledger address.</p><hr/><p>For <em>ETHERS</em> our make-believe "city" uses the same <code>0xd6106c445A07a6A1caF02FC8050F1FDe30d7cE8b</code> <em>ledger address</em> with the <a href="https://rinkeby.etherscan.io/address/0xd6106c445A07a6A1caF02FC8050F1FDe30d7cE8b" target="_blank">Rinkeby testnet</a>.</p>`,
       atCar: false,
       carAddress: null,
       plateHash: null,
@@ -101,11 +102,7 @@ class App extends React.Component {
         <div className="ui icon red message">
           <i className="exclamation circle icon"></i>
           <i aria-hidden="true" className="close icon" onClick={(event) => this.setState({ error: null })}></i>
-          <div className="content">
-            <div className="header">
-              <h5>{this.state.error}</h5>
-            </div>
-          </div>
+          <div className="content"><p>{this.state.error}</p></div>
         </div>
       );
     }
@@ -113,12 +110,24 @@ class App extends React.Component {
     if (this.state.hint) {
       var hint = (
         <div className="ui icon blue message">
-          <i className="info circle icon"></i>
           <i aria-hidden="true" className="close icon" onClick={(event) => this.setState({ hint: null })}></i>
           <div className="content">
-            <div className="header">
-              <h5>{this.state.hint}</h5>
+            <div style={{display: "flex", justifyContent: "flex-start"}}>
+              <i className="info circle large icon" style={{paddingRight:"1.5em"}}></i>
+              <span dangerouslySetInnerHTML={{ __html: this.state.hint }}></span>
             </div>
+          </div>
+        </div>
+      );
+    }
+    // show footnote
+    if (this.state.footnote) {
+      var footnote = (
+        <div className="ui positive message" style={{marginTop: "30px", marginBottom: "30px", width: "80%"}}>
+          <i aria-hidden="true" className="close icon" onClick={(event) => this.setState({ footnote: null })}></i>
+          <div className="content">
+            <div className="header" style={{textAlign: "center"}}>Background Info</div>
+            <p dangerouslySetInnerHTML={{ __html: this.state.footnote }}></p>
           </div>
         </div>
       );
@@ -133,8 +142,8 @@ class App extends React.Component {
     return (
       <div>
 
-        <div style={{ position: "absolute", display: "flex", flexDirection: "column", fontSize: "large", fontFamily: "cursive", marginLeft:"10px" }}>
-          <a href="https://github.com/JakubNer/bc-community-samples/tree/toll-device-app/toll-device-app" target="_blank" style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ position: "absolute", display: "flex", flexDirection: "column", fontSize: "large", fontFamily: "cursive", marginLeft:"10px", zIndex: "1" }}>
+          <a href="https://github.com/overhide/ledgers.js-demo-serverless-dapp" target="_blank" style={{ display: "flex", alignItems: "center" }}>
             <img src="assets/icons8-github-96.png" style={{ width: "48px" }}></img><span style={{ marginLeft: "10px" }}>README</span>
           </a>
           <a href="https://youtu.be/oLJsU3aSCP4" target="_blank" style={{ display: "flex", alignItems: "center" }}>
@@ -149,7 +158,7 @@ class App extends React.Component {
           </div>
           {/* VISA hint */}
           {visaHint}
-          <div style={{position: "absolute", top: "5px", left: "10%", width: "80%", zIndex: "110", opacity: "0.8"}}>
+          <div style={{position: "absolute", top: "5px", left: "10%", width: "80%", zIndex: "110", opacity: "0.80"}}>
             {/* error banner for whole page */}
             {error}
             {/* hint banner */}
@@ -205,7 +214,9 @@ class App extends React.Component {
                 </div>
               </div>
             </div>
-          </div>            
+          </div>
+          {/* footnote banner */}
+          {footnote}
         </div>
       </div>
     );
