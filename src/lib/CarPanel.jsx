@@ -110,6 +110,7 @@ class CarPanel extends React.Component {
                   setError={this.props.setError}
                   setLoading={this.setLoading}
                   doHint={this.props.doHint}
+                  shouldVisaHintShow={this.props.shouldVisaHintShow}
                   checkTimeRemaining={this.state.checkTimeRemainingFn} />
               </div>
             </div>

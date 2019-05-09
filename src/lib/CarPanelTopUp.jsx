@@ -140,10 +140,12 @@ class CarPanelTopUp extends React.Component {
       this.props.doHint('topupWalletSign');
       var signature = await oh$.sign(imparter, challenge);
       this.props.doHint('topupWalletPay');
+      if (this.state.chosenCurrency == 'dollars') this.props.shouldVisaHintShow(true);
       let aDayAgo = new Date((new Date()).getTime() - 24*60*60*1000);     // we compare tallies...
       let before = await oh$.getTally(imparter, {address: to}, aDayAgo);  // ... by taking a sample before
       await oh$.createTransaction(imparter, amount, to);
       this.props.doHint('topupWalletConsistent');
+      if (this.state.chosenCurrency == 'dollars') this.props.shouldVisaHintShow(false);
       for (var i = 0; i < 12; i++) {
         let now = await oh$.getTally(imparter, { address: to }, aDayAgo); // ... we take a sample now
         if (now > before) break;                                          // ... and exit out as soon as decentralized
@@ -155,6 +157,7 @@ class CarPanelTopUp extends React.Component {
     } catch (error) {
       this.props.setError(new String(error));
       this.props.setLoading(false);
+      if (this.state.chosenCurrency == 'dollars') this.props.shouldVisaHintShow(false);
     }
   }
 

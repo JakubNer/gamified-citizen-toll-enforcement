@@ -26,7 +26,8 @@ class App extends React.Component {
       enforcementCoordsY: null,
       hunterCoordsX: null,
       hunterCoordsY: null,
-      hunterCoordsZone: null
+      hunterCoordsZone: null,
+      showVisaHint: false
     };
     this.fetchAdmin();
   }
@@ -61,6 +62,10 @@ class App extends React.Component {
       console.log('clearing hint');
       this.setState({ hint: null });
     }
+  }
+
+  shouldVisaHintShow = (yes) => {
+    this.setState({showVisaHint: yes});
   }
 
   setCarAddress = (address, plateHash) => {
@@ -112,6 +117,12 @@ class App extends React.Component {
         </div>
       );
     }
+    // show VISA help
+    if (this.state.showVisaHint) {
+      var visaHint = (
+        <img src="assets/visa.png" style={{position: "absolute", top: "-100px", right: "-100px"}}></img>
+      );
+    }
     // main UI
     return (
       <div>
@@ -130,6 +141,8 @@ class App extends React.Component {
           <div className={`ui ${this.state.loading ? "active" : ""} dimmer`}>
             <div className="ui loader"></div>
           </div>
+          {/* VISA hint */}
+          {visaHint}
           <div style={{position: "absolute", top: "5px", left: "10%", width: "80%", zIndex: "110", opacity: "0.8"}}>
             {/* error banner for whole page */}
             {error}
@@ -148,6 +161,7 @@ class App extends React.Component {
                   <CarPanel
                     setError={this.setError}
                     doHint={this.doHint}
+                    shouldVisaHintShow={this.shouldVisaHintShow}
                     carAddressSetterFn={this.setCarAddress} />
                 </div>
               </div>
