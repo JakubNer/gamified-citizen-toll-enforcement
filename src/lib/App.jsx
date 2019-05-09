@@ -143,7 +143,7 @@ class App extends React.Component {
       <div>
 
         <div style={{ position: "absolute", display: "flex", flexDirection: "column", fontSize: "large", fontFamily: "cursive", marginLeft:"10px", zIndex: "1" }}>
-          <a href="https://github.com/overhide/ledgers.js-demo-serverless-dapp" target="_blank" style={{ display: "flex", alignItems: "center" }}>
+          <a href="https://github.com/JakubNer/gamified-citizen-toll-enforcement" target="_blank" style={{ display: "flex", alignItems: "center" }}>
             <img src="assets/icons8-github-96.png" style={{ width: "48px" }}></img><span style={{ marginLeft: "10px" }}>README</span>
           </a>
           <a href="https://youtu.be/oLJsU3aSCP4" target="_blank" style={{ display: "flex", alignItems: "center" }}>
