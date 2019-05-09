@@ -120,7 +120,7 @@ class App extends React.Component {
     // show VISA help
     if (this.state.showVisaHint) {
       var visaHint = (
-        <img src="assets/visa.png" style={{position: "absolute", top: "-100px", right: "-100px"}}></img>
+        <img src="assets/visa.png" style={{position: "absolute", top: "10px", right: "0px", zIndex: "200"}}></img>
       );
     }
     // main UI
