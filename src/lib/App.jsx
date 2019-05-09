@@ -1,5 +1,5 @@
 import config from "../config.json";
-import {getAdmin} from "./utils";
+import {getAdmin, delay} from "./utils";
 
 import React from "react";
 import CarPanel from "./CarPanel";
@@ -27,7 +27,7 @@ class App extends React.Component {
       hunterCoordsX: null,
       hunterCoordsY: null,
       hunterCoordsZone: null,
-      showVisaHint: false
+      visaHintOpacity: null
     };
     this.fetchAdmin();
   }
@@ -64,8 +64,14 @@ class App extends React.Component {
     }
   }
 
-  shouldVisaHintShow = (yes) => {
-    this.setState({showVisaHint: yes});
+  shouldVisaHintShow = async (yes) => {
+    if (yes) {
+      this.setState({ visaHintOpacity: "0"});
+      await delay(0);
+      this.setState({ visaHintOpacity: "1" });
+    } else {
+      this.setState({ visaHintOpacity: null });
+    }
   }
 
   setCarAddress = (address, plateHash) => {
@@ -118,9 +124,9 @@ class App extends React.Component {
       );
     }
     // show VISA help
-    if (this.state.showVisaHint) {
+    if (this.state.visaHintOpacity) {
       var visaHint = (
-        <img src="assets/visa.png" style={{position: "absolute", top: "10px", right: "0px", zIndex: "200"}}></img>
+        <img src="assets/visa.png" style={{ position: "absolute", top: "10px", right: "0px", zIndex: "200", opacity: this.state.visaHintOpacity, transition: "opacity 1s ease-in 4s"}}></img>
       );
     }
     // main UI
