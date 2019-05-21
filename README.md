@@ -272,7 +272,7 @@ This demo uses the [ledger-based authorizations](https://github.com/overhide/ove
 *Ledger-based authorization* is a very simple concept where fiat and crypto payments are available on a pseudonymous public ledger with each participant being able to prove ownership of their entry on this ledger (crypto PKI).  More literature on the subject:
 
 * [quick summary](https://github.com/overhide/overhide/blob/master/docs/remuneration-api.md#ledger-based-authorization)
-* [detailed write-up](https://medium.com/@jakub.ner/introduction-to-overhide-ledger-and-motivation-for-why-its-useful-f9c987f2205f?source=friends_link&sk=18f6e8a90efbbc4ac28df50ab50833de)
+* [detailed write-up](https://overhide.io/2019/03/20/why.html)
 * [video introduction](https://www.youtube.com/watch?v=moc1P9W0yTk)
 
 Using the [overhide remuneration API](https://rinkeby.ethereum.overhide.io/swagger.html) in a backend and the [ledgers.js](https://www.npmjs.com/package/ledgers.js) library in a login-page a developer can provide authorization into different tiers of access with multiple currencies--hedging against new currencies with these abstractions.  Future-proof code need only be written once.  The relationship between the *API* and [ledgers.js](https://www.npmjs.com/package/ledgers.js) is summarized in the [quick summary write-up](https://github.com/overhide/overhide/blob/master/docs/remuneration-api.md#the-remuneration-api-and-ledgersjs)
